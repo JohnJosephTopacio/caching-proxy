@@ -1,0 +1,39 @@
+{
+  "name": "caching_proxy",
+  "version": "1.0.0",
+  "description": "Caching Proxy Server built with Typescript, Express, Redis, and Docker.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnJosephTopacio/caching-proxy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/JohnJosephTopacio/caching-proxy/issues"
+  },
+  "homepage": "https://github.com/JohnJosephTopacio/caching-proxy#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.4.1",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "~6.0.0",
+    "typescript-eslint": "^8.69.0"
+  }
+}
