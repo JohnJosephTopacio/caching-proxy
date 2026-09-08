@@ -10,5 +10,9 @@ export function validatePort(port: string): number {
 
   const convertedPort = Number(port);
 
+  if (convertedPort < 1 || convertedPort > 65535) {
+    throw new InvalidArgumentError('Port must be a number from 1 - 65535');
+  }
+
   return convertedPort;
 }
