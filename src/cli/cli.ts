@@ -7,12 +7,18 @@ program.name('caching-proxy').description('Start a caching proxy server.').versi
 program
   .command('start')
   .description('Start the caching proxy server with a port and origin.')
-  .requiredOption('-p, --port <PORT>', 'The port number on which the proxy server will listen')
-  .requiredOption('-o, --origin <URL>', 'The destination server URL to proxy requests to')
+  .requiredOption(
+    '-p, --port <PORT>',
+    'The port number on which the proxy server will listen',
+    validatePort,
+  )
+  .requiredOption(
+    '-o, --origin <URL>',
+    'The destination server URL to proxy requests to',
+    validateOrigin,
+  )
   .action((options) => {
-    const port = validatePort(options.port);
-    validateOrigin(options.origin);
-    console.log(`port: ${port}`);
+    console.log(`port: ${options.port}`);
     console.log(`origin: ${options.origin}`);
   });
 
