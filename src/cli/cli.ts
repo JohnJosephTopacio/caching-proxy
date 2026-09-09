@@ -1,6 +1,11 @@
 import { Command } from 'commander';
 import { validateOrigin, validatePort } from './validation.js';
 
+interface StartOptions {
+  port: number;
+  origin: URL;
+}
+
 export function createProgram() {
   const program = new Command();
 
@@ -19,7 +24,7 @@ export function createProgram() {
       'The destination server URL to proxy requests to',
       validateOrigin,
     )
-    .action((options) => {
+    .action((options: StartOptions) => {
       console.log(`port: ${options.port}`);
       console.log(`origin: ${options.origin}`);
     });
@@ -28,7 +33,7 @@ export function createProgram() {
     .command('clear-cache')
     .description('Clears the cache - this command is not implemented yet');
 
-  program.parse();
+  return program;
 }
 
 export default createProgram;
