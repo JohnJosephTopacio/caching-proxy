@@ -38,5 +38,8 @@
   },
   "dependencies": {
     "commander": "^15.0.0"
+  },
+  "bin": {
+    "caching-proxy": "./dist/index.js"
   }
 }
