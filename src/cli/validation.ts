@@ -21,8 +21,7 @@ export function validateOrigin(origin: string): URL {
   let originURL: URL;
   try {
     originURL = new URL(origin);
-  } catch (error) {
-    console.error(error);
+  } catch {
     throw new InvalidArgumentError('Origin must be a valid URL');
   }
 
