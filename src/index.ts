@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-import program from './cli/cli.js';
+import createProgram from './cli/cli.js';
+
+createProgram();
