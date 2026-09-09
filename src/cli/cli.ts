@@ -8,12 +8,12 @@ program
   .command('start')
   .description('Start the caching proxy server with a port and origin.')
   .requiredOption(
-    '-p, --port <PORT>',
+    '-p, --port <port>',
     'The port number on which the proxy server will listen',
     validatePort,
   )
   .requiredOption(
-    '-o, --origin <URL>',
+    '-o, --origin <url>',
     'The destination server URL to proxy requests to',
     validateOrigin,
   )
