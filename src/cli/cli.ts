@@ -1,4 +1,5 @@
 import { Command } from 'commander';
+import { validateOrigin, validatePort } from './validation.js';
 const program = new Command();
 
 program.name('caching-proxy').description('Start a caching proxy server.').version('1.0.0');
@@ -9,8 +10,10 @@ program
   .requiredOption('--port, <PORT>', 'The port number on which the proxy server will listen')
   .requiredOption('--origin, <URL>', 'The destination server URL to proxy requests to')
   .action((options) => {
-    console.log(options.port);
-    console.log(options.origin);
+    const port = validatePort(options.port);
+    validateOrigin(options.origin);
+    console.log(`port: ${port}`);
+    console.log(`origin: ${options.origin}`);
   });
 
 program

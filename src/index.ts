@@ -1,1 +1,1 @@
-console.log(`Caching Proxy Server ready to be built.`);
+import program from './cli/cli.js';

@@ -16,3 +16,23 @@ export function validatePort(port: string): number {
 
   return convertedPort;
 }
+
+export function validateOrigin(origin: string): URL {
+  let originURL: URL;
+  try {
+    originURL = new URL(origin);
+  } catch (error) {
+    console.error(error);
+    throw new InvalidArgumentError('Origin must be a valid URL');
+  }
+
+  if (originURL.protocol !== 'http:' && originURL.protocol !== 'https:') {
+    throw new InvalidArgumentError('Origin protocol must be http or https');
+  }
+
+  if (originURL.search || originURL.hash) {
+    throw new InvalidArgumentError('Origin must not have query parameters or fragment identifier');
+  }
+
+  return originURL;
+}
