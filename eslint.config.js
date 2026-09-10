@@ -8,7 +8,7 @@ export default defineConfig(
   globalIgnores(['dist/**']),
 
   {
-    files: ['src/**/*.ts'],
+    files: ['src/**/*.ts', 'tests/**/*.ts'],
 
     extends: [eslint.configs.recommended, tseslint.configs.recommended],
 

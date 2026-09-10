@@ -1,1 +1,6 @@
-console.log(`Caching Proxy Server ready to be built.`);
+#!/usr/bin/env node
+import createProgram from './cli/cli.js';
+
+const program = createProgram();
+
+await program.parseAsync();
