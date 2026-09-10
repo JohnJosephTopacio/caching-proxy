@@ -33,5 +33,9 @@ export function validateOrigin(origin: string): URL {
     throw new InvalidArgumentError('Origin must not have query parameters or fragment identifier');
   }
 
+  if (originURL.username || originURL.password) {
+    throw new InvalidArgumentError('Origin must not contain embedded credentials');
+  }
+
   return originURL;
 }
