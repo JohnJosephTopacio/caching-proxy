@@ -29,6 +29,7 @@
   "homepage": "https://github.com/JohnJosephTopacio/caching-proxy#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
     "@types/node": "^26.4.1",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
@@ -40,7 +41,8 @@
     "vitest": "^5.0.0"
   },
   "dependencies": {
-    "commander": "^15.0.0"
+    "commander": "^15.0.0",
+    "express": "^5.2.1"
   },
   "bin": {
     "caching-proxy": "./dist/index.js"
