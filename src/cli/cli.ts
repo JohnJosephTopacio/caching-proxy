@@ -1,7 +1,8 @@
 import { Command } from 'commander';
 import { validateOrigin, validatePort } from './validation.js';
+import { startServer } from '../server/start-server.js';
 
-interface StartOptions {
+export interface StartOptions {
   port: number;
   origin: URL;
 }
@@ -25,8 +26,7 @@ export function createProgram() {
       validateOrigin,
     )
     .action((options: StartOptions) => {
-      console.log(`port: ${options.port}`);
-      console.log(`origin: ${options.origin}`);
+      startServer(options);
     });
 
   program
