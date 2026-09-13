@@ -29,6 +29,7 @@ export function createProxyHandler(origin: URL): RequestHandler {
 
       const responseBody = await originResponse.arrayBuffer();
 
+      // .from is the supported method to instantiate a node buffer
       response.send(Buffer.from(responseBody));
     } catch (error) {
       next(error);
