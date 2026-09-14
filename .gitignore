@@ -5,3 +5,4 @@ dist/
 test.js
 *.test.js
 sandbox.ts
+.rest
