@@ -23,10 +23,18 @@ export function createProxyHandler(origin: URL): RequestHandler {
       const targetUrl = buildTargetUrl(origin, request.originalUrl);
       const requestHeaders = buildRequestHeaders(request);
       const requestBody = await readRequestBody(request);
-      const originResponse = await fetch(targetUrl, {
+
+      const fetchOptions: RequestInit = {
         method: request.method,
         headers: requestHeaders,
-      });
+        redirect: 'manual',
+      };
+
+      if (requestBody !== undefined) {
+        fetchOptions.body = requestBody;
+      }
+
+      const originResponse = await fetch(targetUrl, fetchOptions);
 
       response.status(originResponse.status);
 
@@ -36,9 +44,15 @@ export function createProxyHandler(origin: URL): RequestHandler {
         }
       });
 
+      if (request.method === 'HEAD') {
+        response.end();
+        return;
+      }
+
+      // Wait for the entire raw body
       const responseBody = await originResponse.arrayBuffer();
 
-      // .from is the supported method to instantiate a node buffer
+      // Make sure body is reliably recognized as raw binary data by creating a Buffer view over it
       response.send(Buffer.from(responseBody));
     } catch (error) {
       next(error);
