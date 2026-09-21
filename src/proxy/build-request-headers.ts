@@ -18,7 +18,7 @@ export function buildRequestHeaders(request: Request): Headers {
   const connectionHeader = request.headers.connection;
 
   if (connectionHeader) {
-    for (const name in connectionHeader.split(',')) {
+    for (const name of connectionHeader.split(',')) {
       excludedHeaders.add(name.trim().toLowerCase());
     }
   }
