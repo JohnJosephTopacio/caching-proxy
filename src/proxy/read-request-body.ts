@@ -1,6 +1,8 @@
 import type { Request } from 'express';
 
-export async function readRequestBody(request: Request): Promise<ArrayBuffer | undefined> {
+export async function readRequestBody(
+  request: Request,
+): Promise<Uint8Array<ArrayBuffer> | undefined> {
   if (request.method === 'GET' || request.method === 'HEAD') {
     return undefined;
   }
@@ -17,7 +19,5 @@ export async function readRequestBody(request: Request): Promise<ArrayBuffer | u
     return undefined;
   }
 
-  // Buffer's .buffer type doesn't match what fetch requires and might return the complete allocation besides those visible through concatenation
-  // .from creates a new Uint8Array view only from visible bytes, and .buffer returns an ArrayBuffer type which matches fetch
-  return Uint8Array.from(Buffer.concat(chunks)).buffer;
+  return new Uint8Array(Buffer.concat(chunks));
 }
