@@ -25,6 +25,7 @@ export function buildRequestHeaders(request: Request): Headers {
 
   excludedHeaders.add('host');
   excludedHeaders.add('content-length');
+  excludedHeaders.add('expect');
 
   for (const [name, value] of Object.entries(request.headers)) {
     if (value === undefined || excludedHeaders.has(name)) {
