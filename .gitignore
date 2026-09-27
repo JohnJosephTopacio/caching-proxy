@@ -4,3 +4,5 @@ dist/
 *.log
 test.js
 *.test.js
+sandbox.ts
+.rest
