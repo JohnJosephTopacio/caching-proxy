@@ -36,7 +36,18 @@ Previously, I thought I had a good grasp of http requests, and that it's all fai
 ### Forwarding the body 
 Forwading the body was relatively much simpler. The crucial part I learned was that the Request object is a stream. To be more specific, it extends the NodeJS http.IncomingMessage, which is a stream. Which means I can use a for await to store the incoming body chunk by chunk before forwarding it to the origin.
 
-### Commander and Vitest
-These should be their own entry, but as I started the journal late I will just include it here. Commander has saved me a lot of time when creating the initial skeleton for a command with two subcommands. It has it's native way of handling subcommands, and it's as easy as chaining some methods to differentiate them. This has made my code considerably shorter, as I avoided writing the tedious parsing of the different possible combinations a user can potentially provide arguments. That's just one of the many things that Commander has made more convenient. 
+### Commander
+ Commander has saved me a lot of time when creating the initial skeleton for a command with two subcommands. It has it's native way of handling subcommands, and it's as easy as chaining some methods to differentiate them. This has made my code considerably shorter, as I avoided writing the tedious parsing of the different possible combinations a user can potentially provide arguments. That's just one of the many things that Commander has made more convenient. 
 
 Furthermore, executables and shell command have always been abstracted, more like a mystery in my head before. While using Commander to set up the initial command structure for the caching-proxy, I've taken the liberty to learn more about the terminal, shell, processes, and I have learned invaluable lessons in the process. I have learned about environment variables, and that they really are just important information stored to provide better context to the process that inherits them. The PATH variable surprised me, I didn't expect that the reason commands work without full paths is because the OS literally just searches every path listed in PATH. It's suprisingly naive, but I'm sure the way-smarter people before me has a reason for that.
+
+</details>
+
+<details>
+<summary> Log #2: Vitest and Supertest </summary> 
+<b>Start Date</b>: September 24, 2026  
+<br><br>
+
+###  Vitest and Supertest
+Vitest is very reminiscent of frameworks like Jasmine, so it was a little easier grasping how it initially. Supertest on the other hand is really convenient, the fact that you don't even have to run the server you're testing is somewhat perplexing and cool. Making a factory function for creating the application has showed its worth in this part, I can see how it can make even tests in the future much more controlled and explicit.
+</details>
