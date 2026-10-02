@@ -44,7 +44,8 @@
   },
   "dependencies": {
     "commander": "^15.0.0",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "redis": "^6.3.0"
   },
   "bin": {
     "caching-proxy": "./dist/index.js"
