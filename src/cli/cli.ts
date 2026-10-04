@@ -1,11 +1,9 @@
 import { Command } from 'commander';
 import { validateOrigin, validatePort } from './validation.js';
 import { startServer } from '../server/start-server.js';
-
-export interface StartOptions {
-  port: number;
-  origin: URL;
-}
+import { connectRedis } from '../cache/connect-redis.js';
+import { getRedisUrl } from '../config/redis.js';
+import type { StartOptions } from '../server/start-server.js';
 
 export function createProgram() {
   const program = new Command();
@@ -25,8 +23,47 @@ export function createProgram() {
       'The destination server URL to proxy requests to',
       validateOrigin,
     )
-    .action((options: StartOptions) => {
-      startServer(options);
+    .action(async (options: StartOptions) => {
+      const redisClient = await connectRedis(getRedisUrl());
+
+      console.log(`Redis connection ready: ${redisClient.isReady}`);
+
+      const server = startServer(options);
+
+      let shutdownStarted = false;
+
+      async function shutdown(signal: string): Promise<void> {
+        if (shutdownStarted) {
+          return;
+        }
+
+        shutdownStarted = true;
+        console.log(`\nReceived ${signal}. Shutting down...`);
+
+        try {
+          await new Promise<void>((resolve, reject) => {
+            server.close((error) => {
+              if (error) {
+                reject(error);
+                return;
+              }
+
+              resolve();
+            });
+          });
+        } catch (error) {
+          console.error('Graceful shutdown failed:', error);
+          process.exitCode = 1;
+        }
+      }
+
+      process.once('SIGINT', () => {
+        void shutdown('SIGINT');
+      });
+
+      process.once('SIGTERM', () => {
+        void shutdown('SIGTERM');
+      });
     });
 
   program
