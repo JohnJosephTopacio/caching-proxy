@@ -32,7 +32,42 @@ export function createProgram() {
 
       console.log(`Redis connection ready: ${redisClient.isReady}`);
 
-      startServer(options);
+      const server = startServer(options);
+
+      let shutdownStarted = false;
+
+      async function shutdown(signal: string): Promise<void> {
+        if (shutdownStarted) {
+          return;
+        }
+
+        shutdownStarted = true;
+        console.log(`\nReceived ${signal}. Shutting down...`);
+
+        try {
+          await new Promise<void>((resolve, reject) => {
+            server.close((error) => {
+              if (error) {
+                reject(error);
+                return;
+              }
+
+              resolve();
+            });
+          });
+        } catch (error) {
+          console.error('Graceful shutdown failed:', error);
+          process.exitCode = 1;
+        }
+      }
+
+      process.once('SIGINT', () => {
+        void shutdown('SIGINT');
+      });
+
+      process.once('SIGTERM', () => {
+        void shutdown('SIGTERM');
+      });
     });
 
   program
