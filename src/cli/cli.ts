@@ -1,6 +1,8 @@
 import { Command } from 'commander';
 import { validateOrigin, validatePort } from './validation.js';
 import { startServer } from '../server/start-server.js';
+import { connectRedis } from '../cache/connect-redis.js';
+import { getRedisUrl } from '../config/redis.js';
 
 export interface StartOptions {
   port: number;
@@ -25,7 +27,11 @@ export function createProgram() {
       'The destination server URL to proxy requests to',
       validateOrigin,
     )
-    .action((options: StartOptions) => {
+    .action(async (options: StartOptions) => {
+      const redisClient = await connectRedis(getRedisUrl());
+
+      console.log(`Redis connection ready: ${redisClient.isReady}`);
+
       startServer(options);
     });
 
