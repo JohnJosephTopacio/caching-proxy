@@ -19,7 +19,7 @@ caching-proxy start -p <number> -o <string>
 
 ## Dev Journal
 
-<details>
+<details open>
 <summary> Log #1: Forwarding Headers and Requests </summary> 
 <br>
 
@@ -42,7 +42,7 @@ Furthermore, executables and shell command have always been abstracted, more lik
 
 </details>
 
-<details>
+<details open>
 <summary> Log #2: Vitest and Supertest </summary> 
 <br>
 
@@ -52,7 +52,7 @@ Vitest is very reminiscent of frameworks like Jasmine, which I have used before,
 Making a **factory function** for creating the application has showed its worth in this part, it made setting up the testing application as easy as passing in a test origin. I didn't have to import the actual start server code or call the start command which would have added unnecessary complexity to the testing.
 </details>
 
-<details>
+<details open>
 <summary> Log #3: Redis, Docker, and Graceful Shutdown </summary> 
 <br>
 
