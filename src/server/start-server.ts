@@ -1,6 +1,10 @@
-import type { StartOptions } from '../cli/cli.js';
 import type { Server } from 'node:http';
 import { createApp } from './create-app.js';
+
+export interface StartOptions {
+  port: number;
+  origin: URL;
+}
 
 export function startServer({ origin, port }: StartOptions): Server {
   const app = createApp(origin);

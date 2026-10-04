@@ -3,11 +3,7 @@ import { validateOrigin, validatePort } from './validation.js';
 import { startServer } from '../server/start-server.js';
 import { connectRedis } from '../cache/connect-redis.js';
 import { getRedisUrl } from '../config/redis.js';
-
-export interface StartOptions {
-  port: number;
-  origin: URL;
-}
+import type { StartOptions } from '../server/start-server.js';
 
 export function createProgram() {
   const program = new Command();
