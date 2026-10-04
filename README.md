@@ -67,4 +67,5 @@ I encountered a **problem** when trying to gracefully exit with Ctrl + C in the 
 </details>
 
 
- 
+ ![Login Page](images/login.png)
+ ![Register Page](images/register.png)
