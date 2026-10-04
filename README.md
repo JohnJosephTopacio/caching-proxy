@@ -21,7 +21,7 @@ caching-proxy start -p <number> -o <string>
 
 <details>
 <summary> Log #1: Forwarding Headers and Requests </summary> 
-<br><br>
+<br>
 
 I remember thinking to myself that building the base proxy server was going to be a piece of cake. What could be so hard about copying the client's request and forwarding it? 
 
@@ -44,7 +44,7 @@ Furthermore, executables and shell command have always been abstracted, more lik
 
 <details>
 <summary> Log #2: Vitest and Supertest </summary> 
-<br><br>
+<br>
 
 ###  Vitest and Supertest
 Vitest is very reminiscent of frameworks like Jasmine, which I have used before, so it was a little easier to grasp initially. What stood out to me in this part is **Supertest**, and the fact that it handles server start up, port management, and server closing automatically. It saved some time and lines of code when writing the integration testing.
@@ -54,7 +54,7 @@ Making a **factory function** for creating the application has showed its worth 
 
 <details>
 <summary> Log #3: Redis, Docker, and Graceful Shutdown </summary> 
-<br><br>
+<br>
 
 ###  Redis 
 I've been hearing a lot about Redis ever since I've started learning full-stack development, it's always been flagged as an advanced concept. It is a little funny to think that as of my current understanding, Redis is a glorified **RAM** that sits between system components like a server or a database. Of course, in reality it is so much more than that, and using it as a cache would save a lot of compute for the origin server not to mention API calls. I've also learned that it uses a **single-threaded event-loop driven architecture**, which is instantly made me think it is very similar if not the same as **Javascript**. The same could be said for a lot of technology, but in retrospect, its premise is really simple, but it is executed very well.
@@ -63,7 +63,7 @@ I've been hearing a lot about Redis ever since I've started learning full-stack 
 **Docker** has once again showed its convenience when building multi-component systems. **YAML** being a superset of JSON was a fun fact I learned this time around. I also digged a little deeper on the difference between **Docker and VMs** and learned that for one, Docker only borrows the host's kernel, while VMs as we know, creates an entire separate OS. 
 
 ### Handling shutdowns gracefully
-I encountered a **problem** when emitting 
+I encountered a **problem** when trying to gracefully exit with Ctrl + C in the terminal when I was testing the shutdown handler, for some reason the event listener was not calling the callback I defined even on a **signal interrupt**. It turns out, since I was using a tsx **watcher**, it was consuming the signal the handler was relying on. Upon re-building and running the program redirectly, the handler logged and functioned as expected.
 </details>
 
 
