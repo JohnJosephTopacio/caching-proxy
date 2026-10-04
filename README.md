@@ -65,7 +65,3 @@ I've been hearing a lot about Redis ever since I've started learning full-stack 
 ### Handling shutdowns gracefully
 I encountered a **problem** when trying to gracefully exit with Ctrl + C in the terminal when I was testing the shutdown handler, for some reason the event listener was not calling the callback I defined even on a **signal interrupt**. It turns out, since I was using a tsx **watcher**, it was consuming the signal the handler was relying on. Upon re-building and running the program redirectly, the handler logged and functioned as expected.
 </details>
-
-
- ![Login Page](images/login.png)
- ![Register Page](images/register.png)
